@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:myportofolio_mobile/widgets/left_drawer.dart';
+import 'package:myportofolio_mobile/widgets/project_card.dart';
 
 class ItemHomepage {
   final String name;
@@ -16,13 +18,9 @@ class MyHomePage extends StatelessWidget {
   static const String kelas = 'PBP F';
 
   static const List<ItemHomepage> items = [
+    ItemHomepage('Lihat Proyek', Icons.work_outline_rounded, Color(0xFF2563EB)),
     ItemHomepage(
-      'Lihat Experience',
-      Icons.work_outline_rounded,
-      Color(0xFF2563EB),
-    ),
-    ItemHomepage(
-      'Tambah Experience',
+      'Tambah Proyek',
       Icons.add_circle_outline_rounded,
       Color(0xFF15803D),
     ),
@@ -41,6 +39,7 @@ class MyHomePage extends StatelessWidget {
         backgroundColor: Theme.of(context).colorScheme.primary,
         foregroundColor: Colors.white,
       ),
+      drawer: const LeftDrawer(),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(24),
         child: Center(
@@ -172,56 +171,6 @@ class InfoCard extends StatelessWidget {
               ),
             ),
           ],
-        ),
-      ),
-    );
-  }
-}
-
-class ItemCard extends StatelessWidget {
-  final ItemHomepage item;
-
-  const ItemCard(this.item, {super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Material(
-      color: item.color,
-      borderRadius: BorderRadius.circular(16),
-      clipBehavior: Clip.antiAlias,
-      child: InkWell(
-        mouseCursor: SystemMouseCursors.click,
-        hoverColor: Colors.white12,
-        splashColor: Colors.white24,
-        onTap: () {
-          ScaffoldMessenger.of(context)
-            ..hideCurrentSnackBar()
-            ..showSnackBar(
-              SnackBar(
-                content: Text('Kamu telah menekan tombol ${item.name}!'),
-                behavior: SnackBarBehavior.floating,
-                duration: const Duration(seconds: 2),
-              ),
-            );
-        },
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 32),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Icon(item.icon, size: 40, color: Colors.white),
-              const SizedBox(height: 16),
-              Text(
-                item.name,
-                textAlign: TextAlign.center,
-                style: const TextStyle(
-                  fontSize: 17,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                ),
-              ),
-            ],
-          ),
         ),
       ),
     );
